@@ -1,9 +1,8 @@
 import sqlalchemy
 import sqlalchemy as sq
 from sqlalchemy.orm import declarative_base, relationship
-from baza import DSN
 
-
+DSN = 'postgresql://postgres:123456@localhost:5432/postgres'
 engine = sqlalchemy.create_engine(DSN)
 
 con = engine.connect()
@@ -28,7 +27,7 @@ class Book(Base):
     title = sq.Column(sq.String(length=500), unique=True)
     id_publisher = sq.Column(sq.Integer, sq.ForeignKey('publisher.id'))
 
-    publisher = relationship(Publisher, backref='book')
+    publisher = relationship(Publisher, backref='books')
 
 
 class Stock(Base):
